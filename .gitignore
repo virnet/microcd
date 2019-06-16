@@ -10,3 +10,7 @@
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
+/.git/
+.idea/
+/web/node_modules/  
+/conf/micro.yaml
