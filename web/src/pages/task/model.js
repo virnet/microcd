@@ -11,7 +11,7 @@ export default modelExtend(pageModel, {
   subscriptions: {
     setup({ dispatch, history }) {
       history.listen(location => {
-        if (pathMatchRegexp('/post', location.pathname)) {
+        if (pathMatchRegexp('/task', location.pathname)) {
           dispatch({
             type: 'query',
             payload: {

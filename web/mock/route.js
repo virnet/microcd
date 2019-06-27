@@ -20,7 +20,36 @@ const database = [
   {
     id: '2',
     breadcrumbParentId: '1',
-    name: 'Users',
+    name: 'Tasks',
+    i18n: {
+      zh: {
+        name: '任务',
+      },
+      'pt-br': {
+        name: 'Tasks',
+      },
+    },
+    icon: 'shopping-cart',
+    route: '/task',
+  },
+  {
+    id: '3',
+    breadcrumbParentId: '1',
+    name: 'User',
+    i18n: {
+      zh: {
+        name: '用户',
+      },
+      'pt-br': {
+        name: 'Usuário',
+      },
+    },
+    icon: 'user',
+  },
+  {
+    id: '31',
+    menuParentId: '3',
+    name: 'User Manager',
     i18n: {
       zh: {
         name: '用户管理',
@@ -33,37 +62,37 @@ const database = [
     route: '/user',
   },
   {
-    id: '7',
-    breadcrumbParentId: '1',
-    name: 'Posts',
+    id: '32',
+    menuParentId: '3',
+    name: 'Privileges',
     i18n: {
       zh: {
-        name: '用户管理',
+        name: '权限管理',
       },
       'pt-br': {
-        name: 'Posts',
+        name: 'Privileges',
       },
     },
-    icon: 'shopping-cart',
-    route: '/post',
+    icon: 'user',
+    route: '/user',
   },
   {
-    id: '21',
-    menuParentId: '-1',
-    breadcrumbParentId: '2',
-    name: 'User Detail',
+    id: '33',
+    menuParentId: '3',
+    name: 'Role',
     i18n: {
       zh: {
-        name: '用户详情',
+        name: '角色管理',
       },
       'pt-br': {
-        name: 'Detalhes do usuário',
+        name: 'Role',
       },
     },
-    route: '/user/:id',
+    icon: 'user',
+    route: '/user',
   },
   {
-    id: '3',
+    id: '4',
     breadcrumbParentId: '1',
     name: 'Request',
     i18n: {
@@ -78,7 +107,7 @@ const database = [
     route: '/request',
   },
   {
-    id: '4',
+    id: '5',
     breadcrumbParentId: '1',
     name: 'UI Element',
     i18n: {
@@ -92,8 +121,8 @@ const database = [
     icon: 'camera-o',
   },
   {
-    id: '45',
-    breadcrumbParentId: '4',
+    id: '51',
+    breadcrumbParentId: '5',
     menuParentId: '4',
     name: 'Editor',
     i18n: {
@@ -108,7 +137,7 @@ const database = [
     route: '/UIElement/editor',
   },
   {
-    id: '5',
+    id: '6',
     breadcrumbParentId: '1',
     name: 'Charts',
     i18n: {
@@ -122,7 +151,7 @@ const database = [
     icon: 'code-o',
   },
   {
-    id: '51',
+    id: '61',
     breadcrumbParentId: '5',
     menuParentId: '5',
     name: 'ECharts',
@@ -138,7 +167,7 @@ const database = [
     route: '/chart/ECharts',
   },
   {
-    id: '52',
+    id: '62',
     breadcrumbParentId: '5',
     menuParentId: '5',
     name: 'HighCharts',
@@ -154,7 +183,7 @@ const database = [
     route: '/chart/highCharts',
   },
   {
-    id: '53',
+    id: '63',
     breadcrumbParentId: '5',
     menuParentId: '5',
     name: 'Rechartst',

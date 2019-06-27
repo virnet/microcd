@@ -7,13 +7,10 @@ import { stringify } from 'qs'
 import { withI18n } from '@lingui/react'
 import { Page } from 'components'
 import List from './components/List'
+import Filter from './components/Filter'
 
 const { TabPane } = Tabs
 
-const EnumPostStatus = {
-  UNPUBLISH: 1,
-  PUBLISHED: 2,
-}
 
 @withI18n()
 @connect(({ post, loading }) => ({ post, loading }))
@@ -26,7 +23,7 @@ class Post extends PureComponent {
     const listProps = {
       pagination,
       dataSource: list,
-      loading: loading.effects['post/query'],
+      loading: loading.effects['task/query'],
       onChange(page) {
         router.push({
           pathname,
@@ -39,38 +36,42 @@ class Post extends PureComponent {
       },
     }
 
-    const handleTabClick = key => {
+    const handleRefresh = newQuery => {
       router.push({
         pathname,
-        search: stringify({
-          status: key,
-        }),
+        search: stringify(
+          {
+            ...query,
+            ...newQuery,
+          },
+          { arrayFormat: 'repeat' }
+        ),
       })
+    }
+    const filterProps = {
+      filter: {
+        ...query,
+      },
+      onFilterChange(value) {
+        handleRefresh({
+          ...value,
+          page: 1,
+        })
+      },
+      // onAdd() {
+      //   dispatch({
+      //     type: 'user/showModal',
+      //     payload: {
+      //       modalType: 'create',
+      //     },
+      //   })
+      // },
     }
 
     return (
       <Page inner>
-        <Tabs
-          activeKey={
-            query.status === String(EnumPostStatus.UNPUBLISH)
-              ? String(EnumPostStatus.UNPUBLISH)
-              : String(EnumPostStatus.PUBLISHED)
-          }
-          onTabClick={handleTabClick}
-        >
-          <TabPane
-            tab={i18n.t`Publised`}
-            key={String(EnumPostStatus.PUBLISHED)}
-          >
-            <List {...listProps} />
-          </TabPane>
-          <TabPane
-            tab={i18n.t`Unpublished`}
-            key={String(EnumPostStatus.UNPUBLISH)}
-          >
-            <List {...listProps} />
-          </TabPane>
-        </Tabs>
+        <Filter {...filterProps} />
+        <List {...listProps} />
       </Page>
     )
   }
