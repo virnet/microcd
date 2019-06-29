@@ -12,7 +12,8 @@ export default {
   removeUser: 'DELETE /user/:id',
   removeUserList: 'POST /users/delete',
 
-  queryPostList: '/tasks',
+  queryTaskList: '/tasks',
+  queryTaskClassify: '/tasks/class',
 
   queryDashboard: '/dashboard',
 }

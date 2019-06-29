@@ -74,7 +74,7 @@ const database = [
       },
     },
     icon: 'user',
-    route: '/user',
+    route: '/privileges',
   },
   {
     id: '33',
@@ -89,7 +89,7 @@ const database = [
       },
     },
     icon: 'user',
-    route: '/user',
+    route: '/role',
   },
   {
     id: '4',
@@ -122,8 +122,7 @@ const database = [
   },
   {
     id: '51',
-    breadcrumbParentId: '5',
-    menuParentId: '4',
+    menuParentId: '5',
     name: 'Editor',
     i18n: {
       zh: {
@@ -138,7 +137,6 @@ const database = [
   },
   {
     id: '6',
-    breadcrumbParentId: '1',
     name: 'Charts',
     i18n: {
       zh: {
@@ -152,8 +150,7 @@ const database = [
   },
   {
     id: '61',
-    breadcrumbParentId: '5',
-    menuParentId: '5',
+    menuParentId: '6',
     name: 'ECharts',
     i18n: {
       zh: {
@@ -168,8 +165,7 @@ const database = [
   },
   {
     id: '62',
-    breadcrumbParentId: '5',
-    menuParentId: '5',
+    menuParentId: '6',
     name: 'HighCharts',
     i18n: {
       zh: {
@@ -184,8 +180,7 @@ const database = [
   },
   {
     id: '63',
-    breadcrumbParentId: '5',
-    menuParentId: '5',
+    menuParentId: '6',
     name: 'Rechartst',
     i18n: {
       zh: {

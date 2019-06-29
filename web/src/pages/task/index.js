@@ -18,7 +18,7 @@ class Post extends PureComponent {
   render() {
     const { post, loading, location, i18n } = this.props
     const { list, pagination } = post
-    const { query, pathname } = location
+    const { query, pathname,classify } = location
 
     const listProps = {
       pagination,
@@ -36,6 +36,7 @@ class Post extends PureComponent {
       },
     }
 
+
     const handleRefresh = newQuery => {
       router.push({
         pathname,
@@ -49,6 +50,8 @@ class Post extends PureComponent {
       })
     }
     const filterProps = {
+      dataSource: list,
+      loading: loading.effects['task/classify'],
       filter: {
         ...query,
       },

@@ -1,13 +1,10 @@
 /* global document */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import moment from 'moment'
-import { FilterItem } from 'components'
 import { Trans, withI18n } from '@lingui/react'
-import { Form, Button, Row, Col, DatePicker, Input } from 'antd'
+import { Form, Button, Row, Col, Input ,Select } from 'antd'
 
 const { Search } = Input
-const { RangePicker } = DatePicker
 
 const ColProps = {
   xs: 24,
@@ -25,20 +22,11 @@ const TwoColProps = {
 @withI18n()
 @Form.create()
 class Filter extends Component {
+
   componentDidUpdate(prevProps, prevState) {
     if (Object.keys(prevProps.filter).length === 0) {
       this.handleReset()
     }
-  }
-  handleFields = fields => {
-    const { createTime } = fields
-    if (createTime.length) {
-      fields.createTime = [
-        moment(createTime[0]).format('YYYY-MM-DD'),
-        moment(createTime[1]).format('YYYY-MM-DD'),
-      ]
-    }
-    return fields
   }
 
   handleSubmit = () => {
@@ -46,7 +34,6 @@ class Filter extends Component {
     const { getFieldsValue } = form
 
     let fields = getFieldsValue()
-    fields = this.handleFields(fields)
     onFilterChange(fields)
   }
 
@@ -67,29 +54,18 @@ class Filter extends Component {
     setFieldsValue(fields)
     this.handleSubmit()
   }
-  handleChange = (key, values) => {
-    const { form, onFilterChange } = this.props
-    const { getFieldsValue } = form
-
-    let fields = getFieldsValue()
-    fields[key] = values
-    fields = this.handleFields(fields)
-    onFilterChange(fields)
+  handleClassifyChange = (key, values) => {
+    console.log(key+":"+values);
+  }
+  handleClassifySearch = (key, values) => {
+    console.log(key+":"+values);
   }
 
   render() {
     const { onAdd, filter, form, i18n } = this.props
+    const { dataSource } = this.props;
     const { getFieldDecorator } = form
-    const { name, full_name,email } = filter
-
-    let initialCreateTime = []
-    if (filter.createTime && filter.createTime[0]) {
-      initialCreateTime[0] = moment(filter.createTime[0])
-    }
-    if (filter.createTime && filter.createTime[1]) {
-      initialCreateTime[1] = moment(filter.createTime[1])
-    }
-
+    const { name, classify } = filter
     return (
       <Row gutter={24}>
         <Col {...ColProps} xl={{ span: 4 }} md={{ span: 8 }}>
@@ -100,74 +76,42 @@ class Filter extends Component {
             />
           )}
         </Col>
-        <Col
-          {...ColProps}
-          xl={{ span: 4 }}
-          md={{ span: 8 }}
-        >
-          {getFieldDecorator('full_name', { initialValue: full_name })(
-            <Search
-              placeholder={i18n.t`Search Full Name`}
-              onSearch={this.handleSubmit}
-            />
+
+        <Col {...ColProps} xl={{ span: 4 }} md={{ span: 8 }}>
+          {getFieldDecorator('classify', { initialValue: classify })(
+            <Select style={{ width: 200 }}
+                    showSearch
+                    onChange={this.handleClassifyChange}
+                    placeholder="Select Classify"
+                    onSearch={this.handleClassifySearch}
+            >
+              {
+                dataSource.length && dataSource.map( (item, index) => (
+                  <Select.Option key={index} value={item}>{item}</Select.Option>)
+                )
+              }
+            </Select>
           )}
-        </Col>
-        <Col
-          {...ColProps}
-          xl={{ span: 4 }}
-          md={{ span: 8 }}
-        >
-          {getFieldDecorator('email', { initialValue: email })(
-            <Search
-              placeholder={i18n.t`Search Email`}
-              onSearch={this.handleSubmit}
-            />
-          )}
-        </Col>
-        <Col
-          {...ColProps}
-          xl={{ span: 6 }}
-          md={{ span: 8 }}
-          sm={{ span: 12 }}
-          id="createTimeRangePicker"
-        >
-          <FilterItem label={i18n.t`Create Time`}>
-            {getFieldDecorator('createTime', {
-              initialValue: initialCreateTime,
-            })(
-              <RangePicker
-                style={{ width: '100%' }}
-                onChange={this.handleChange.bind(this, 'createTime')}
-                getCalendarContainer={() => {
-                  return document.getElementById('createTimeRangePicker')
-                }}
-              />
-            )}
-          </FilterItem>
         </Col>
         <Col
           {...TwoColProps}
-          xl={{ span: 24 }}
-          md={{ span: 24 }}
-          sm={{ span: 24 }}
+          xl={{ span: 12 }}
+          md={{ span: 12 }}
+          sm={{ span: 12 }}
         >
-          <Row type="flex" align="middle" justify="space-between">
-            <div>
-              <Button
-                type="primary"
-                className="margin-right"
-                onClick={this.handleSubmit}
-              >
-                <Trans>Search</Trans>
-              </Button>
-              <Button onClick={this.handleReset}>
-                <Trans>Reset</Trans>
-              </Button>
-            </div>
-            <Button type="ghost" onClick={onAdd}>
-              <Trans>Create</Trans>
+            <Button
+              type="primary"
+              className="margin-right"
+              onClick={this.handleSubmit}
+            >
+              <Trans>Search</Trans>
             </Button>
-          </Row>
+            <Button onClick={this.handleReset}>
+              <Trans>Reset</Trans>
+            </Button>
+          <Button type="ghost" onClick={onAdd}>
+            <Trans>Create</Trans>
+          </Button>
         </Col>
       </Row>
     )

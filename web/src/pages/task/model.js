@@ -3,7 +3,8 @@ import api from 'api'
 import { pathMatchRegexp } from 'utils'
 import { pageModel } from 'utils/model'
 
-const { queryPostList } = api
+const { queryTaskList,queryTaskClassify } = api
+
 
 export default modelExtend(pageModel, {
   namespace: 'post',
@@ -11,12 +12,22 @@ export default modelExtend(pageModel, {
   subscriptions: {
     setup({ dispatch, history }) {
       history.listen(location => {
+        console.log("PATHNAME:"+location.pathname)
         if (pathMatchRegexp('/task', location.pathname)) {
           dispatch({
             type: 'query',
             payload: {
               status: 2,
               ...location.query,
+              ...location.classify,
+            },
+          })
+        }else if (pathMatchRegexp('/task', location.pathname)){
+          dispatch({
+            type: 'classify',
+            payload: {
+              status: 2,
+              ...location.classify,
             },
           })
         }
@@ -26,7 +37,7 @@ export default modelExtend(pageModel, {
 
   effects: {
     *query({ payload }, { call, put }) {
-      const data = yield call(queryPostList, payload)
+      const data = yield call(queryTaskList, payload)
       if (data.success) {
         yield put({
           type: 'querySuccess',
@@ -37,6 +48,19 @@ export default modelExtend(pageModel, {
               pageSize: Number(payload.pageSize) || 10,
               total: data.total,
             },
+          },
+        })
+      } else {
+        throw data
+      }
+    },
+    *classify({ payload }, { call, put }) {
+      const data = yield call(queryTaskClassify, payload)
+      if (data.success) {
+        yield put({
+          type: 'querySuccess',
+          payload: {
+            list: data.data
           },
         })
       } else {
