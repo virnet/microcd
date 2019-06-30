@@ -35,7 +35,9 @@ const database = Mock.mock({
     },
   ],
 }).data
-
+function sleep(sleepTime) {
+  for(var start = +new Date; +new Date - start <= sleepTime; ) { }
+}
 module.exports = {
   [`GET ${ApiPrefix}/tasks`](req, res) {
     const { query } = req
@@ -64,4 +66,16 @@ module.exports = {
       total: newData.length,
     })
   },
+  [`GET ${ApiPrefix}/tasks/classify`](req, res) {
+    sleep(3000);
+    res.status(200).json([{
+      id:0,
+      name:"分类A",
+      date:new Date
+    },{
+      id:1,
+      name:"分类C",
+      date:new Date
+    }])
+  }
 }

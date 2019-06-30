@@ -13,7 +13,7 @@ export default {
   removeUserList: 'POST /users/delete',
 
   queryTaskList: '/tasks',
-  queryTaskClassify: '/tasks/class',
+  queryTaskClassify: '/tasks/classify',
 
   queryDashboard: '/dashboard',
 }

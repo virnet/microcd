@@ -14,10 +14,6 @@ const { queryRouteList, logoutUser, queryUserInfo } = api
 export default {
   namespace: 'app',
   state: {
-    user: {},
-    permissions: {
-      visit: [],
-    },
     routeList: [
       {
         id: '1',
@@ -43,17 +39,20 @@ export default {
     ],
   },
   subscriptions: {
-    setupHistory({ dispatch, history }) {
-      history.listen(location => {
-        dispatch({
-          type: 'updateState',
-          payload: {
-            locationPathname: location.pathname,
-            locationQuery: location.query,
-          },
-        })
-      })
-    },
+    // setup({ dispatch }) {
+    //   dispatch({ type: 'query' })
+    // },
+    // setupHistory({ dispatch, history }) {
+    //   history.listen(location => {
+    //     dispatch({
+    //       type: 'updateState',
+    //       payload: {
+    //         locationPathname: location.pathname,
+    //         locationQuery: location.query,
+    //       },
+    //     })
+    //   })
+    // },
 
     setupRequestCancel({ history }) {
       history.listen(() => {
@@ -67,16 +66,14 @@ export default {
         })
       })
     },
-
-    setup({ dispatch }) {
-      dispatch({ type: 'query' })
-    },
   },
   effects: {
     *query({ payload }, { call, put, select }) {
-      const { success, user } = yield call(queryUserInfo, payload)
+      // store isInit to prevent query trigger by refresh
+      const isInit = store.get('isInit')
+      if (isInit) return
       const { locationPathname } = yield select(_ => _.app)
-
+      const { success, user } = yield call(queryUserInfo, payload)
       if (success && user) {
         const { list } = yield call(queryRouteList)
         const { permissions } = user
@@ -98,15 +95,11 @@ export default {
             return cases.every(_ => _)
           })
         }
-        yield put({
-          type: 'updateState',
-          payload: {
-            user,
-            permissions,
-            routeList,
-          },
-        })
-        if (pathMatchRegexp(['/','/login'], window.location.pathname)) {
+        store.set('routeList', routeList)
+        store.set('permissions', permissions)
+        store.set('user', user)
+        store.set('isInit', true)
+        if (pathMatchRegexp(['/', '/login'], window.location.pathname)) {
           router.push({
             pathname: '/dashboard',
           })
@@ -124,22 +117,10 @@ export default {
     *signOut({ payload }, { call, put }) {
       const data = yield call(logoutUser)
       if (data.success) {
-        yield put({
-          type: 'updateState',
-          payload: {
-            user: {},
-            permissions: { visit: [] },
-            menu: [
-              {
-                id: '1',
-                icon: 'laptop',
-                name: 'Dashboard',
-                zhName: '仪表盘',
-                router: '/dashboard',
-              },
-            ],
-          },
-        })
+        store.set('routeList', [])
+        store.set('permissions', { visit: [] })
+        store.set('user', {})
+        store.set('isInit', false)
         yield put({ type: 'query' })
       } else {
         throw data

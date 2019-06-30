@@ -9,7 +9,6 @@ import styles from './Sider.less'
 
 @withI18n()
 class Sider extends PureComponent {
-
   render() {
     const {
       i18n,
@@ -20,6 +19,7 @@ class Sider extends PureComponent {
       onThemeChange,
       onCollapseChange,
     } = this.props
+
     return (
       <Layout.Sider
         width={256}
@@ -40,7 +40,7 @@ class Sider extends PureComponent {
 
         <div className={styles.menuContainer}>
           <ScrollBar
-            option={{
+            options={{
               // Disabled horizontal scrolling, https://github.com/utatti/perfect-scrollbar#options
               suppressScrollX: true,
             }}
@@ -49,7 +49,6 @@ class Sider extends PureComponent {
               menus={menus}
               theme={theme}
               isMobile={isMobile}
-              collapsed={collapsed}
               onCollapseChange={onCollapseChange}
             />
           </ScrollBar>

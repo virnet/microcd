@@ -53,6 +53,7 @@ class Header extends PureComponent {
       const currentLanguage = languages.find(
         item => item.key === i18n._language
       )
+
       rightContent.unshift(
         <Menu
           key="language"

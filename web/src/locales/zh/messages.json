@@ -12,7 +12,6 @@
   "Create": "创建",
   "Create User": "创建用户",
   "CreateTime": "创建时间",
-  "Create Time": "创建时间",
   "Dark": "暗",
   "Delete": "删除",
   "Email": "电子邮件",
@@ -24,7 +23,6 @@
   "Male": "男性",
   "Name": "名字",
   "NickName": "昵称",
-  "Full Name": "全名",
   "Not Found": "未找到",
   "Operation": "操作",
   "Params": "参数",
@@ -50,9 +48,7 @@
   "Update": "更新",
   "Update User": "更新用户",
   "Username": "用户名",
-  "Request": "请求",
   "Views": "浏览数",
   "Visibility": "可见性",
-  "You have viewed all notifications.": "您已查看所有通知",
-  "Please enter 6-16 digits, letters or common symbols. The letters are case-sensitive.": "请输入6-16位数字、字母或常用符号，字母区分大小写。"
+  "You have viewed all notifications.": "您已查看所有通知"
 }

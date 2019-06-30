@@ -18,6 +18,7 @@ class SiderMenu extends PureComponent {
   state = {
     openKeys: store.get('openKeys') || [],
   }
+
   onOpenChange = openKeys => {
     const { menus } = this.props
     const rootSubmenuKeys = menus.filter(_ => !_.menuParentId).map(_ => _.id)
@@ -74,8 +75,10 @@ class SiderMenu extends PureComponent {
       isMobile,
       onCollapseChange,
     } = this.props
+
     // Generating tree-structured data for menu content.
     const menuTree = arrayToTree(menus, 'id', 'menuParentId')
+
     // Find a menu that matches the pathname.
     const currentMenu = menus.find(
       _ => _.route && pathMatchRegexp(_.route, location.pathname)
@@ -91,12 +94,12 @@ class SiderMenu extends PureComponent {
       : {
           openKeys: this.state.openKeys,
         }
+
     return (
       <Menu
         mode="inline"
         theme={theme}
         onOpenChange={this.onOpenChange}
-        inlineCollapsed={collapsed}
         selectedKeys={selectedKeys}
         onClick={
           isMobile
@@ -117,7 +120,6 @@ SiderMenu.propTypes = {
   menus: PropTypes.array,
   theme: PropTypes.string,
   isMobile: PropTypes.bool,
-  collapsed: PropTypes.bool,
   onCollapseChange: PropTypes.func,
 }
 
