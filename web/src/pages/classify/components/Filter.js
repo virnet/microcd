@@ -30,14 +30,7 @@ class Filter extends Component {
     }
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (Object.keys(prevProps.filter).length === 0) {
-  //     this.handleReset()
-  //   }
-  // }
-
   handleSubmit = () => {
-    console.log("提交过滤器")
     const { onFilterChange, form } = this.props
     const { getFieldsValue } = form
 
@@ -46,7 +39,6 @@ class Filter extends Component {
   }
 
   handleReset = () => {
-    console.log("重置过滤器")
     const { form } = this.props
     const { getFieldsValue, setFieldsValue } = form
 
@@ -63,26 +55,14 @@ class Filter extends Component {
     setFieldsValue(fields)
     this.handleSubmit()
   }
-  handleClassifyChange = (key, values) => {
-    console.log(key + ':' + values)
-  }
-  handleClassifySearch = (key, values) => {
-    console.log(key + ':' + values)
-  }
 
   render() {
-    const { onAdd, filter, form, i18n, onLoadingClassify, taskClassify } = this.props
-    const { isLoadingClassify } = this.state
+    const { onAdd, filter, form, i18n } = this.props
     const { getFieldDecorator } = form
-    const { name, classify } = filter
-    if (!isLoadingClassify) {
-      this.setState({ isLoadingClassify: true })
-      onLoadingClassify()
-      console.log('加载分类')
-    }
+    const { name } = filter
     return (
       <Row gutter={24}>
-        <Col {...ColProps} xl={{ span: 6 }} md={{ span: 12 }} sm={{ span: 12 }}>
+        <Col {...ColProps} xl={{ span: 8 }} md={{ span: 12 }} sm={{ span: 12 }}>
           {getFieldDecorator('name', { initialValue: name })(
             <Search
               placeholder={i18n.t`Search Name`}
@@ -91,28 +71,11 @@ class Filter extends Component {
           )}
         </Col>
 
-        <Col {...ColProps} xl={{ span: 6 }} md={{ span: 12 }} sm={{ span: 12 }}>
-          {getFieldDecorator('classify', { initialValue: classify })(
-            <Select style={{ width: '100%' }}
-                    showSearch
-                    onChange={this.handleClassifyChange}
-                    placeholder="Select Classify"
-                    onSearch={this.handleClassifySearch}
-            >
-              {
-                taskClassify.length && taskClassify.map((item) => (
-
-                  <Option key={item.name}>{item.display_name}</Option>),
-                )
-              }
-            </Select>,
-          )}
-        </Col>
         <Col type="flex" align="left" justify="space-between"
              {...TwoColProps}
              xl={{ span: 8 }}
-             md={{ span: 12 }}
-             sm={{ span: 12 }}
+             md={{ span: 8 }}
+             sm={{ span: 8 }}
         >
           <Button
             type="primary"
@@ -128,9 +91,9 @@ class Filter extends Component {
         </Col>
         <Col type="flex" align="right" justify="space-between"
              {...TwoColProps}
-             xl={{ span: 4 }}
-             md={{ span: 12 }}
-             sm={{ span: 12 }}
+             xl={{ span: 8 }}
+             md={{ span: 4 }}
+             sm={{ span: 4 }}
         >
           <Button type="ghost" onClick={onAdd}>
             <Trans>Create</Trans>

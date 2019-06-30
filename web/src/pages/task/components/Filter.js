@@ -75,21 +75,14 @@ class Filter extends Component {
     const { isLoadingClassify } = this.state
     const { getFieldDecorator } = form
     const { name, classify } = filter
-    console.log("过滤器加载")
-    // if (!isLoadingClassify) {
-    //   this.setState({ isLoadingClassify: true })
-    //   onLoadingClassify()
-    //   console.log('加载分类')
-    // }
-    //
-    // if (taskClassify.length) {
-    //   console.log('分类加载到过滤器')
-    //   console.log(taskClassify)
-    //
-    // }
+    if (!isLoadingClassify) {
+      this.setState({ isLoadingClassify: true })
+      onLoadingClassify()
+      console.log('加载分类')
+    }
     return (
       <Row gutter={24}>
-        <Col {...ColProps} xl={{ span: 4 }} md={{ span: 8 }}>
+        <Col {...ColProps} xl={{ span: 6 }} md={{ span: 12 }} sm={{ span: 12 }}>
           {getFieldDecorator('name', { initialValue: name })(
             <Search
               placeholder={i18n.t`Search Name`}
@@ -98,9 +91,9 @@ class Filter extends Component {
           )}
         </Col>
 
-        <Col {...ColProps} xl={{ span: 4 }} md={{ span: 8 }}>
+        <Col {...ColProps} xl={{ span: 6 }} md={{ span: 12 }} sm={{ span: 12 }}>
           {getFieldDecorator('classify', { initialValue: classify })(
-            <Select style={{ width: 200 }}
+            <Select style={{ width: '100%' }}
                     showSearch
                     onChange={this.handleClassifyChange}
                     placeholder="Select Classify"
@@ -109,7 +102,7 @@ class Filter extends Component {
               {
                 taskClassify.length && taskClassify.map((item) => (
 
-                  <Option key={item.id} value={item.name}>{item.name}</Option>),
+                  <Option key={item.name}>{item.display_name}</Option>),
                 )
               }
             </Select>,
@@ -117,7 +110,7 @@ class Filter extends Component {
         </Col>
         <Col type="flex" align="left" justify="space-between"
              {...TwoColProps}
-             xl={{ span: 12 }}
+             xl={{ span: 8 }}
              md={{ span: 12 }}
              sm={{ span: 12 }}
         >
@@ -136,8 +129,8 @@ class Filter extends Component {
         <Col type="flex" align="right" justify="space-between"
              {...TwoColProps}
              xl={{ span: 4 }}
-             md={{ span: 4 }}
-             sm={{ span: 4 }}
+             md={{ span: 12 }}
+             sm={{ span: 12 }}
         >
           <Button type="ghost" onClick={onAdd}>
             <Trans>Create</Trans>

@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { Form, Input, InputNumber, Radio, Modal, Cascader } from 'antd'
-import { Trans, withI18n } from '@lingui/react'
-import city from 'utils/city'
+import { Form, Input,  Modal } from 'antd'
+import { withI18n } from '@lingui/react'
 
 const FormItem = Form.Item
 
@@ -18,8 +17,8 @@ const formItemLayout = {
 @Form.create()
 class UserModal extends PureComponent {
   handleOk = () => {
-    const { item = {}, onOk, form } = this.props
-    const { validateFields, getFieldsValue } = form
+    const { item = {}, onOk, form } = this.props;
+    const { validateFields, getFieldsValue } = form;
 
     validateFields(errors => {
       if (errors) {
@@ -28,15 +27,15 @@ class UserModal extends PureComponent {
       const data = {
         ...getFieldsValue(),
         key: item.key,
-      }
-      data.address = data.address.join(' ')
+      };
+      data.address = data.address.join(' ');
       onOk(data)
     })
   }
 
   render() {
-    const { item = {}, onOk, form, i18n, ...modalProps } = this.props
-    const { getFieldDecorator } = form
+    const { item = {}, onOk, form, i18n, ...modalProps } = this.props;
+    const { getFieldDecorator } = form;
 
     return (
       <Modal {...modalProps} onOk={this.handleOk}>

@@ -35,10 +35,10 @@ const database = [
   {
     id: '3',
     breadcrumbParentId: '1',
-    name: 'User',
+    name: 'Manager',
     i18n: {
       zh: {
-        name: '用户',
+        name: '管理',
       },
       'pt-br': {
         name: 'Usuário',
@@ -49,7 +49,7 @@ const database = [
   {
     id: '31',
     menuParentId: '3',
-    name: 'User Manager',
+    name: 'User',
     i18n: {
       zh: {
         name: '用户管理',
@@ -90,6 +90,21 @@ const database = [
     },
     icon: 'user',
     route: '/role',
+  },
+  {
+    id: '34',
+    menuParentId: '3',
+    name: 'Classify',
+    i18n: {
+      zh: {
+        name: '分类管理',
+      },
+      'pt-br': {
+        name: 'Classify',
+      },
+    },
+    icon: 'user',
+    route: '/classify',
   },
   {
     id: '4',

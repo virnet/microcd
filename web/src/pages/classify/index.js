@@ -10,8 +10,8 @@ import Filter from './components/Filter'
 
 
 @withI18n()
-@connect(({ task, loading }) => ({ task, loading }))
-class Task extends PureComponent {
+@connect(({ classify, loading }) => ({ classify, loading }))
+class Classify extends PureComponent {
   componentDidMount() {
     this.handleRefresh({ page: 1, pageSize: 10 })
   }
@@ -24,7 +24,7 @@ class Task extends PureComponent {
       ...newQuery,
     }
     dispatch({
-      type: 'task/query',
+      type: 'classify/query',
       payload,
     })
     router.push({
@@ -33,13 +33,12 @@ class Task extends PureComponent {
     })
   }
   render() {
-    const { task, loading, location, i18n,dispatch } = this.props
-    const { list, pagination } = task
-    const { taskClassify } = task
-    const { query, pathname } = location
+    const { classify, loading, location, i18n,dispatch } = this.props
+    const { list, pagination } = classify
+    const { query } = location
     const listProps = {
       dataSource: list,
-      loading: loading.effects['task/query'],
+      loading: loading.effects['classify/query'],
       pagination,
       onChange: page => {
         this.handleRefresh({
@@ -60,19 +59,8 @@ class Task extends PureComponent {
     }
 
     const filterProps = {
-      taskClassify: taskClassify,
       filter: {
         ...query,
-      },
-      onLoadingClassify(){
-        dispatch({
-          type: 'task/classify',
-          payload: {
-          },
-        }).then(()=> {
-          const { taskClassify } = task
-          console.log(taskClassify)
-        })
       },
       onFilterChange: value => {
         this.handleRefresh({
@@ -82,7 +70,7 @@ class Task extends PureComponent {
       },
       // onAdd() {
       //   dispatch({
-      //     type: 'task/showModal',
+      //     type: 'classify/showModal',
       //     payload: {
       //       modalType: 'create',
       //     },
@@ -99,11 +87,11 @@ class Task extends PureComponent {
   }
 }
 
-Task.propTypes = {
-  task: PropTypes.object,
+Classify.propTypes = {
+  classify: PropTypes.object,
   loading: PropTypes.object,
   location: PropTypes.object,
   dispatch: PropTypes.func,
 }
 
-export default Task
+export default Classify

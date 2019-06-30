@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 import { connect } from 'dva'
 import { Page } from 'components'
 
-@connect(({ app, privileges, loading }) => ({
-  privileges,
+@connect(({ app, role, loading }) => ({
+  role,
   loading,
 }))
-class Privileges extends PureComponent {
+class Role extends PureComponent {
   render() {
     return (
       <Page >该功能正在开发中
@@ -16,9 +16,9 @@ class Privileges extends PureComponent {
   }
 }
 
-Privileges.propTypes = {
-  privileges: PropTypes.object,
+Role.propTypes = {
+  role: PropTypes.object,
   loading: PropTypes.object,
 }
 
-export default Privileges
+export default Role

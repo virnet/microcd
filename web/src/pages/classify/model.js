@@ -7,10 +7,7 @@ const { queryTaskList,queryTaskClassify } = api
 
 
 export default modelExtend(pageModel, {
-  namespace: 'task',
-  state: {
-    taskClassify: [],      // 存放用户列表
-  },
+  namespace: 'classify',
   reducers: {
     updateState (state, { payload }) {
       return { ...state, ...payload };
@@ -36,21 +33,6 @@ export default modelExtend(pageModel, {
         throw data
       }
     },
-    *classify({ payload }, { call, put }) {
-      const data = yield call(queryTaskClassify, payload)
-      console.log("分类信息读取完成")
-      console.log(data.list)
-      if (data.success) {
-        yield put({
-          type: 'updateState',
-          payload: {
 
-            taskClassify: data.list,
-          },
-        })
-      } else {
-        throw data
-      }
-    },
   },
 })

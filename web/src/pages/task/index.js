@@ -38,24 +38,29 @@ class Task extends PureComponent {
     const { taskClassify } = task
     const { query, pathname } = location
     const listProps = {
-      pagination,
       dataSource: list,
       loading: loading.effects['task/query'],
-      onChange(page) {
-        router.push({
-          pathname,
-          search: stringify({
-            ...query,
-            page: page.current,
-            pageSize: page.pageSize,
-          }),
+      pagination,
+      onChange: page => {
+        this.handleRefresh({
+          page: page.current,
+          pageSize: page.pageSize,
         })
       },
+      // onChange(page) {
+      //   router.push({
+      //     pathname,
+      //     search: stringify({
+      //       ...query,
+      //       page: page.current,
+      //       pageSize: page.pageSize,
+      //     }),
+      //   })
+      // },
     }
 
     const filterProps = {
       taskClassify: taskClassify,
-      dataSource: taskClassify,
       filter: {
         ...query,
       },
@@ -77,7 +82,7 @@ class Task extends PureComponent {
       },
       // onAdd() {
       //   dispatch({
-      //     type: 'user/showModal',
+      //     type: 'task/showModal',
       //     payload: {
       //       modalType: 'create',
       //     },

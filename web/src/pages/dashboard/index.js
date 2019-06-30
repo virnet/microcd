@@ -23,7 +23,7 @@ const bodyStyle = {
 }))
 class Dashboard extends PureComponent {
   render() {
-    const {   dashboard } = this.props
+    const {   dashboard } = this.props;
     const {
       numbers,
       completed,
@@ -34,7 +34,7 @@ class Dashboard extends PureComponent {
       <Col key={key} lg={6} md={12}>
         <NumberCard {...item} />
       </Col>
-    ))
+    ));
 
     return (
       <Page

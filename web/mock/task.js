@@ -67,15 +67,15 @@ module.exports = {
     })
   },
   [`GET ${ApiPrefix}/tasks/classify`](req, res) {
-    sleep(3000);
+    //sleep(3000);
     res.status(200).json([{
       id:0,
-      name:"分类A",
-      date:new Date
+      name:"AAA",
+      display_name:"选项A"
     },{
       id:1,
-      name:"分类C",
-      date:new Date
+      name:"BBB",
+      display_name:"选项B"
     }])
   }
 }
