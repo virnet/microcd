@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { Form, Input,  Modal } from 'antd'
+import { Form, Input, Modal } from 'antd'
 import { withI18n } from '@lingui/react'
 
 const FormItem = Form.Item
@@ -17,8 +17,8 @@ const formItemLayout = {
 @Form.create()
 class UserModal extends PureComponent {
   handleOk = () => {
-    const { item = {}, onOk, form } = this.props;
-    const { validateFields, getFieldsValue } = form;
+    const { item = {}, onOk, form } = this.props
+    const { validateFields, getFieldsValue } = form
 
     validateFields(errors => {
       if (errors) {
@@ -27,15 +27,14 @@ class UserModal extends PureComponent {
       const data = {
         ...getFieldsValue(),
         key: item.key,
-      };
-      data.address = data.address.join(' ');
+      }
       onOk(data)
     })
   }
 
   render() {
-    const { item = {}, onOk, form, i18n, ...modalProps } = this.props;
-    const { getFieldDecorator } = form;
+    const { item = {}, onOk, form, i18n, ...modalProps } = this.props
+    const { getFieldDecorator } = form
 
     return (
       <Modal {...modalProps} onOk={this.handleOk}>
@@ -51,8 +50,8 @@ class UserModal extends PureComponent {
             })(<Input />)}
           </FormItem>
           <FormItem label={i18n.t`Full Name`} hasFeedback {...formItemLayout}>
-            {getFieldDecorator('fullName', {
-              initialValue: item.nickName,
+            {getFieldDecorator('full_name', {
+              initialValue: item.full_name,
               rules: [
                 {
                   required: true,
@@ -65,7 +64,6 @@ class UserModal extends PureComponent {
               initialValue: item.phone,
               rules: [
                 {
-                  required: true,
                   pattern: /^1[34578]\d{9}$/,
                   message: i18n.t`The input is not valid phone!`,
                 },
@@ -77,7 +75,6 @@ class UserModal extends PureComponent {
               initialValue: item.email,
               rules: [
                 {
-                  required: true,
                   pattern: /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/,
                   message: i18n.t`The input is not valid E-mail!`,
                 },
@@ -94,7 +91,7 @@ class UserModal extends PureComponent {
                   message: i18n.t`Please enter 6-16 digits, letters or common symbols. The letters are case-sensitive.`,
                 },
               ],
-            })(<Input  type="password"/>)}
+            })(<Input type="password" />)}
           </FormItem>
         </Form>
       </Modal>

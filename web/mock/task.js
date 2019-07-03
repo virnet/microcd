@@ -66,16 +66,22 @@ module.exports = {
       total: newData.length,
     })
   },
-  [`GET ${ApiPrefix}/tasks/classify`](req, res) {
-    //sleep(3000);
-    res.status(200).json([{
-      id:0,
-      name:"AAA",
-      display_name:"选项A"
+  [`GET ${ApiPrefix}/outside/source`](req, res) {
+    res.status(200).json({data:[{
+      name:"test_jenkins_1",
+      display_name:"测试Jenkins1"
     },{
-      id:1,
-      name:"BBB",
-      display_name:"选项B"
-    }])
+      name:"test_jenkins_2",
+      display_name:"测试Jenkins2"
+    }],total:2})
+  },
+  [`GET ${ApiPrefix}/outside/project`](req, res) {
+    res.status(200).json({data:[{
+      name:"trade/trade_server",
+      display_name:"实时交易处理服务"
+    },{
+      name:"trade/trade_manager",
+      display_name:"交易管理服务"
+      }],total:2})
   }
 }

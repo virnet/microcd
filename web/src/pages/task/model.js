@@ -1,19 +1,17 @@
 import modelExtend from 'dva-model-extend'
 import api from 'api'
-import { pathMatchRegexp } from 'utils'
 import { pageModel } from 'utils/model'
 
-const { queryTaskList,queryTaskClassify } = api
-
+const { queryTaskList, queryTaskClassify } = api
 
 export default modelExtend(pageModel, {
   namespace: 'task',
   state: {
-    taskClassify: [],      // 存放用户列表
+    taskClassify: [], // 存放用户列表
   },
   reducers: {
-    updateState (state, { payload }) {
-      return { ...state, ...payload };
+    updateState(state, { payload }) {
+      return { ...state, ...payload }
     },
   },
   effects: {
@@ -37,14 +35,11 @@ export default modelExtend(pageModel, {
     },
     *classify({ payload }, { call, put }) {
       const data = yield call(queryTaskClassify, payload)
-      console.log("分类信息读取完成")
-      console.log(data.list)
       if (data.success) {
         yield put({
           type: 'updateState',
           payload: {
-
-            taskClassify: data.list,
+            taskClassify: data.data,
           },
         })
       } else {

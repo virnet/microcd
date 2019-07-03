@@ -14,6 +14,14 @@ export default {
 
   queryTaskList: '/tasks',
   queryTaskClassify: '/tasks/classify',
+  queryProjectList: '/outside/project',
+  querySourceList: '/outside/source',
 
   queryDashboard: '/dashboard',
+
+  queryClassifyList: '/classifies',
+  updateClassify: 'Patch /classify/:id',
+  createClassify: 'POST /classify',
+  removeClassify: 'DELETE /classify/:id',
+  removeClassifyList: 'POST /classifies/delete',
 }

@@ -5,7 +5,6 @@ import moment from 'moment'
 import { FilterItem } from 'components'
 import { Trans, withI18n } from '@lingui/react'
 import { Form, Button, Row, Col, DatePicker, Input, Cascader } from 'antd'
-import city from 'utils/city'
 
 const { Search } = Input
 const { RangePicker } = DatePicker
@@ -81,7 +80,7 @@ class Filter extends Component {
   render() {
     const { onAdd, filter, form, i18n } = this.props
     const { getFieldDecorator } = form
-    const { name, full_name,email } = filter
+    const { name, full_name, email } = filter
 
     let initialCreateTime = []
     if (filter.createTime && filter.createTime[0]) {
@@ -101,11 +100,7 @@ class Filter extends Component {
             />
           )}
         </Col>
-        <Col
-          {...ColProps}
-          xl={{ span: 4 }}
-          md={{ span: 8 }}
-        >
+        <Col {...ColProps} xl={{ span: 4 }} md={{ span: 8 }}>
           {getFieldDecorator('full_name', { initialValue: full_name })(
             <Search
               placeholder={i18n.t`Search Full Name`}
@@ -113,11 +108,7 @@ class Filter extends Component {
             />
           )}
         </Col>
-        <Col
-          {...ColProps}
-          xl={{ span: 4 }}
-          md={{ span: 8 }}
-        >
+        <Col {...ColProps} xl={{ span: 4 }} md={{ span: 8 }}>
           {getFieldDecorator('email', { initialValue: email })(
             <Search
               placeholder={i18n.t`Search Email`}
@@ -159,14 +150,14 @@ class Filter extends Component {
                 className="margin-right"
                 onClick={this.handleSubmit}
               >
-                <Trans>Search</Trans>
+                <Trans>{i18n.t`Search`}</Trans>
               </Button>
               <Button onClick={this.handleReset}>
-                <Trans>Reset</Trans>
+                <Trans>{i18n.t`Reset`}</Trans>
               </Button>
             </div>
             <Button type="ghost" onClick={onAdd}>
-              <Trans>Create</Trans>
+              <Trans>{i18n.t`Create`}</Trans>
             </Button>
           </Row>
         </Col>

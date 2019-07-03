@@ -37,7 +37,7 @@ class Filter extends Component {
   // }
 
   handleSubmit = () => {
-    console.log("提交过滤器")
+    console.log('提交过滤器')
     const { onFilterChange, form } = this.props
     const { getFieldsValue } = form
 
@@ -46,7 +46,7 @@ class Filter extends Component {
   }
 
   handleReset = () => {
-    console.log("重置过滤器")
+    console.log('重置过滤器')
     const { form } = this.props
     const { getFieldsValue, setFieldsValue } = form
 
@@ -71,7 +71,14 @@ class Filter extends Component {
   }
 
   render() {
-    const { onAdd, filter, form, i18n, onLoadingClassify, taskClassify } = this.props
+    const {
+      onAdd,
+      filter,
+      form,
+      i18n,
+      onLoadingClassify,
+      taskClassify,
+    } = this.props
     const { isLoadingClassify } = this.state
     const { getFieldDecorator } = form
     const { name, classify } = filter
@@ -87,32 +94,34 @@ class Filter extends Component {
             <Search
               placeholder={i18n.t`Search Name`}
               onSearch={this.handleSubmit}
-            />,
+            />
           )}
         </Col>
 
         <Col {...ColProps} xl={{ span: 6 }} md={{ span: 12 }} sm={{ span: 12 }}>
           {getFieldDecorator('classify', { initialValue: classify })(
-            <Select style={{ width: '100%' }}
-                    showSearch
-                    onChange={this.handleClassifyChange}
-                    placeholder="Select Classify"
-                    onSearch={this.handleClassifySearch}
+            <Select
+              style={{ width: '100%' }}
+              showSearch
+              onChange={this.handleClassifyChange}
+              placeholder={i18n.t`Select Classify`}
+              onSearch={this.handleClassifySearch}
             >
-              {
-                taskClassify.length && taskClassify.map((item) => (
-
-                  <Option key={item.name}>{item.display_name}</Option>),
-                )
-              }
-            </Select>,
+              {taskClassify.length &&
+                taskClassify.map(item => (
+                  <Option key={item.name}>{item.display_name}</Option>
+                ))}
+            </Select>
           )}
         </Col>
-        <Col type="flex" align="left" justify="space-between"
-             {...TwoColProps}
-             xl={{ span: 8 }}
-             md={{ span: 12 }}
-             sm={{ span: 12 }}
+        <Col
+          type="flex"
+          align="left"
+          justify="space-between"
+          {...TwoColProps}
+          xl={{ span: 8 }}
+          md={{ span: 12 }}
+          sm={{ span: 12 }}
         >
           <Button
             type="primary"
@@ -124,13 +133,15 @@ class Filter extends Component {
           <Button onClick={this.handleReset}>
             <Trans>Reset</Trans>
           </Button>
-
         </Col>
-        <Col type="flex" align="right" justify="space-between"
-             {...TwoColProps}
-             xl={{ span: 4 }}
-             md={{ span: 12 }}
-             sm={{ span: 12 }}
+        <Col
+          type="flex"
+          align="right"
+          justify="space-between"
+          {...TwoColProps}
+          xl={{ span: 4 }}
+          md={{ span: 12 }}
+          sm={{ span: 12 }}
         >
           <Button type="ghost" onClick={onAdd}>
             <Trans>Create</Trans>

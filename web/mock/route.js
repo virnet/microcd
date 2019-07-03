@@ -19,7 +19,6 @@ const database = [
   },
   {
     id: '2',
-    breadcrumbParentId: '1',
     name: 'Tasks',
     i18n: {
       zh: {
@@ -33,8 +32,23 @@ const database = [
     route: '/task',
   },
   {
+    id: '21',
+    menuParentId: '-1',
+    breadcrumbParentId: '2',
+    name: 'Import',
+    i18n: {
+      zh: {
+        name: 'Import',
+      },
+      'pt-br': {
+        name: 'Import',
+      },
+    },
+    icon: 'area-chart',
+    route: '/task/create/import',
+  },
+  {
     id: '3',
-    breadcrumbParentId: '1',
     name: 'Manager',
     i18n: {
       zh: {
@@ -49,6 +63,7 @@ const database = [
   {
     id: '31',
     menuParentId: '3',
+    breadcrumbParentId: '3',
     name: 'User',
     i18n: {
       zh: {
@@ -64,6 +79,7 @@ const database = [
   {
     id: '32',
     menuParentId: '3',
+    breadcrumbParentId: '3',
     name: 'Privileges',
     i18n: {
       zh: {
@@ -79,6 +95,7 @@ const database = [
   {
     id: '33',
     menuParentId: '3',
+    breadcrumbParentId: '3',
     name: 'Role',
     i18n: {
       zh: {
@@ -94,6 +111,7 @@ const database = [
   {
     id: '34',
     menuParentId: '3',
+    breadcrumbParentId: '3',
     name: 'Classify',
     i18n: {
       zh: {

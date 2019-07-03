@@ -8,7 +8,6 @@ import { Page } from 'components'
 import List from './components/List'
 import Filter from './components/Filter'
 
-
 @withI18n()
 @connect(({ task, loading }) => ({ task, loading }))
 class Task extends PureComponent {
@@ -33,7 +32,7 @@ class Task extends PureComponent {
     })
   }
   render() {
-    const { task, loading, location, i18n,dispatch } = this.props
+    const { task, loading, location, i18n, dispatch } = this.props
     const { list, pagination } = task
     const { taskClassify } = task
     const { query, pathname } = location
@@ -64,15 +63,11 @@ class Task extends PureComponent {
       filter: {
         ...query,
       },
-      onLoadingClassify(){
+      onLoadingClassify() {
         dispatch({
           type: 'task/classify',
-          payload: {
-          },
-        }).then(()=> {
-          const { taskClassify } = task
-          console.log(taskClassify)
-        })
+          payload: {},
+        }).then(() => {})
       },
       onFilterChange: value => {
         this.handleRefresh({
@@ -88,7 +83,7 @@ class Task extends PureComponent {
       //     },
       //   })
       // },
-    };
+    }
 
     return (
       <Page inner>

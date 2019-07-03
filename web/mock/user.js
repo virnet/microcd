@@ -7,7 +7,7 @@ let usersListData = Mock.mock({
     {
       id: '@id',
       name: '@name',
-      nick_name: '@last',
+      full_name: '@last',
       mobile: /^1[34578]\d{9}$/,
       email: '@email',
       create_time: '@datetime',
@@ -149,9 +149,7 @@ module.exports = {
       if ({}.hasOwnProperty.call(other, key)) {
         newData = newData.filter(item => {
           if ({}.hasOwnProperty.call(item, key)) {
-            if (key === 'address') {
-              return other[key].every(iitem => item[key].indexOf(iitem) > -1)
-            } else if (key === 'createTime') {
+            if (key === 'create_time') {
               const start = new Date(other[key][0]).getTime()
               const end = new Date(other[key][1]).getTime()
               const now = new Date(item[key]).getTime()
@@ -186,7 +184,7 @@ module.exports = {
 
   [`POST ${ApiPrefix}/user`](req, res) {
     const newData = req.body
-    newData.createTime = Mock.mock('@now')
+    newData.create_time = Mock.mock('@now')
     newData.avatar =
       newData.avatar ||
       Mock.Random.image(
@@ -194,7 +192,7 @@ module.exports = {
         Mock.Random.color(),
         '#757575',
         'png',
-        newData.nick_name.substr(0, 1)
+        newData.full_name.substr(0, 1)
       )
     newData.id = Mock.mock('@id')
 
